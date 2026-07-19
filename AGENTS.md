@@ -43,3 +43,10 @@ Chrome Extension (Manifest V3) that shows timestamps above each chat bubble in G
 
 ## Debug
 Run `window.__gts_debug()` in browser DevTools console — outputs site-specific diagnostics.
+
+## Dev Browser
+- Start: `D:\code\start-brave-dev.bat` (zentrales Skript für alle Projekte)
+- BraveDev-Profil: `C:\Users\sande\AppData\Local\BraveSoftware\Brave-Browser\User Data\Dev`
+- CDP-Port: `http://127.0.0.1:9222`
+- MCP Config: `C:\Users\sande\.config\opencode\opencode.json` → `--browserUrl http://127.0.0.1:9222`
+- Extension auto-reload via `chrome.runtime.reload()` nach Dateiänderungen
