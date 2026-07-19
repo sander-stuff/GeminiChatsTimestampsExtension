@@ -17,7 +17,7 @@ Chrome Extension (Manifest V3) that shows timestamps above each chat bubble in G
 ## Architecture
 - **Site detection** via `location.hostname` — `SITE.id` is `'gemini'` or `'perplexity'`
 - Each site defines `SITE.getChatId()` and `SITE.getMessageGroups()` returning `{role, element, container}`
-- **Message IDs**: `{chatId}::{role}::{FNV-1a hash of first 80 chars}` (content-based, not DOM position)
+- **Message IDs**: `{chatId}::{role}::{FNV-1a hash of first 80 chars}::{occurrence}` — occurrence counter per role handles duplicate messages (e.g. multiple "Ja")
 - **Timestamp format**: `YYYY-MM-DD HH:MM:SS` local time
 - **Injection**: `injectBefore(el, container, timeStr)` inserts `.gts-timestamp` div above the message element
   - For Perplexity: uses `findOuterContainer()` to walk up past the bubble boundary

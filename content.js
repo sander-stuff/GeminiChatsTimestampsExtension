@@ -117,9 +117,9 @@
          + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
   }
 
-  function makeKey(cid, role, text) {
+  function makeKey(cid, role, text, occurrence) {
     const prefix = text.substring(0, TEXT_CHARS);
-    return cid + '::' + role + '::' + fnv1a(prefix);
+    return cid + '::' + role + '::' + fnv1a(prefix) + '::' + occurrence;
   }
 
   /* ============================================================
@@ -190,6 +190,9 @@
 
     const groups = SITE.getMessageGroups();
 
+    // Track per-role occurrence count for duplicate message disambiguation
+    const counters = {};
+
     for (const group of groups) {
       const el = group.element;
 
@@ -199,7 +202,11 @@
       const text = (el.textContent || '').trim();
       if (!text) continue;
 
-      const key = makeKey(cid, group.role, text);
+      // Increment counter for this role
+      counters[group.role] = (counters[group.role] || 0) + 1;
+      const occurrence = counters[group.role];
+
+      const key = makeKey(cid, group.role, text, occurrence);
 
       let timeStr;
       if (cache[key]) {
