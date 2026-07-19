@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Chat Timestamps",
+  "version": "1.1.0",
+  "description": "Shows timestamps above each chat bubble in Google Gemini and Perplexity AI conversations.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://gemini.google.com/*",
+    "https://www.perplexity.ai/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://www.perplexity.ai/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
